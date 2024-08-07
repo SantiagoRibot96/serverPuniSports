@@ -7,8 +7,6 @@ dotenv.config({
     path: options.mode === "desarrollo" ? "./.env.desarrollo" : "./.env.produccion"
 });
 
-console.log(process.env.MONGO_URL);
-
 const configObject = {
     mongo_url: process.env.MONGO_URL,
     token_pass: process.env.TOKEN_PASS,
