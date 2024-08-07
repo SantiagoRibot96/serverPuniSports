@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.use(cors({
-    origin: 'https://punisports.vercel.app/',
+    origin: 'https://punisports.vercel.app',
     credentials: true
 }));
 app.use(errorHandler);
