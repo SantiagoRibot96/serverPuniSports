@@ -83,7 +83,7 @@ class EmailManager {
                     <p>Has solicitado restablecer tu contraseña. Utiliza el siguiente código para cambiar tu contraseña:</p>
                     <p><strong>${token}</strong></p>
                     <p>Este código expirará en 1 hora.</p>
-                    <a href="http://localhost:5173/reset-password/${email}">Restablecer Contraseña</a>
+                    <a href="https://punisports.vercel.app/reset-password/${email}">Restablecer Contraseña</a>
                     <p>Si no solicitaste este restablecimiento, ignora este correo.</p>
                 `
             };

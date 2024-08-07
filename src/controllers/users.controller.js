@@ -121,7 +121,7 @@ class UserController {
             });
         
             // res.status(200).send({ok: true, message: "Bienvenido usuario con Github", payload: user, isLogged: true});
-            res.redirect("http://localhost:5173");
+            res.redirect("https://punisports.vercel.app/");
         } catch (error) {
             req.logger.error(`No se pudo generar el token: ${error}`);
         }

@@ -19,7 +19,7 @@ router.get("/github", passport.authenticate("github", {
 }), async (req, res) => {});
 
 router.get("/githubcallback", passport.authenticate("github", {
-    failureRedirect: "http://localhost:5173/login"
+    failureRedirect: "https://punisports.vercel.app//login"
 }), userController.githubToken);
 
 router.post("/requestPasswordReset", userController.requestPasswordReset);
