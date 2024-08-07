@@ -14,7 +14,8 @@ const configObject = {
     gh_client_id: process.env.GH_CLIENT_ID,
     gh_client_secret: process.env.GH_CLIENT_SECRET,
     gh_callback_url: process.env.GH_CALLBACK_URL,
-    session_secret: process.env.SESSION_SECRET
+    session_secret: process.env.SESSION_SECRET,
+    server: process.env.SERVER
 };
 
 export default configObject;

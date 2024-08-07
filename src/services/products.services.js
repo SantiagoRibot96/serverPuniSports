@@ -2,6 +2,9 @@ import { ProductModel } from "../models/product.model.js";
 import { CustomError } from "./errors/custom-error.js";
 import { EErrors } from "./errors/enum.js";
 import { getErrorInfo } from "./errors/info.js";
+import configObject from "../config/config.js";
+
+const { server } = configObject;
 
 class ProductService {
     async deleteProduct(pid) {
@@ -58,20 +61,20 @@ class ProductService {
 
                 if(query){
                     queryOptions = {category: query};
-                    prevLink = `http://localhost:8080/api/products?page=${page - 1}&limit=${limit}&sort=${sort}&query=${query}`;
-                    nextLink = `http://localhost:8080/api/products?page=${page + 1}&limit=${limit}&sort=${sort}&query=${query}`;
+                    prevLink = `${server}/products?page=${page - 1}&limit=${limit}&sort=${sort}&query=${query}`;
+                    nextLink = `${server}/products?page=${page + 1}&limit=${limit}&sort=${sort}&query=${query}`;
                 }else{
-                    prevLink = `http://localhost:8080/api/products?page=${page - 1}&limit=${limit}&sort=${sort}`;
-                    nextLink = `http://localhost:8080/api/products?page=${page + 1}&limit=${limit}&sort=${sort}`;
+                    prevLink = `${server}/products?page=${page - 1}&limit=${limit}&sort=${sort}`;
+                    nextLink = `${server}/products?page=${page + 1}&limit=${limit}&sort=${sort}`;
                 }
             }else{
                 if(query){
                     queryOptions = {category: query};
-                    prevLink = `http://localhost:8080/api/products?page=${page - 1}&limit=${limit}&query=${query}`;
-                    nextLink = `http://localhost:8080/api/products?page=${page + 1}&limit=${limit}&query=${query}`;
+                    prevLink = `${server}/products?page=${page - 1}&limit=${limit}&query=${query}`;
+                    nextLink = `${server}/products?page=${page + 1}&limit=${limit}&query=${query}`;
                 }else{
-                    prevLink = `http://localhost:8080/api/products?page=${page - 1}&limit=${limit}`;
-                    nextLink = `http://localhost:8080/api/products?page=${page + 1}&limit=${limit}`;
+                    prevLink = `${server}/products?page=${page - 1}&limit=${limit}`;
+                    nextLink = `${server}/products?page=${page + 1}&limit=${limit}`;
                 }
             }
 
