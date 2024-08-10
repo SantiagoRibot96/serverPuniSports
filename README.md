@@ -1,4 +1,4 @@
-# Entregas de Ribot Santiago
+# Proyecto final de Ribot Santiago - PuniSports
 
 1) `npm install`: Install all dependencies needed to run the project
 2) `npm start`: This will start node app.js
