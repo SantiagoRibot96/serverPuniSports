@@ -57,11 +57,9 @@ class ProductController {
                 nextLink: products.hasNextPage ? products.nextPage : null,
                 prevLink: products.hasPrevPage ? products.prevPage : null,
                 firstPage,
-                limit,
-                // userName: req.user.first_name, 
-                // rol: req.user.rol === "admin" ? 1 : 0,
-                // cid: req.user.cart
+                limit
             });
+            
         } catch (error) {
             next(error);
         }

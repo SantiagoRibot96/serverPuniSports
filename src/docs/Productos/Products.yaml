@@ -1,0 +1,252 @@
+openapi: 3.0.1
+info:
+  title: Documentación del Ecommerce de Ribot
+  description: E-commerce
+servers:
+  - url: https://punisportsapi.up.railway.app
+paths:
+  /api/products:
+    get:
+      summary: Obtener todos los productos con su esquema de paginado.
+      tags:
+        - Productos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  totalPages:
+                    type: number
+                  prevPage:
+                    type: number
+                  nextPage:
+                    type: number
+                  page:
+                    type: number
+                  hasPrevPage:
+                    type: boolean
+                  hasNextPage:
+                    type: boolean
+                  prevLink:
+                    type: string
+                  nextLink:
+                    type: string
+                  firstPage:
+                    type: string
+                  limit:
+                    type: number
+                  userName:
+                    type: string
+                  rol:
+                    type: string
+                  cid:
+                    type: string
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  message:
+                    type: string
+    post:
+      summary: Agregar un nuevo producto
+      tags:
+        - Productos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "producto nuevo creado"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '400':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /api/products/{pid}:
+    get:
+      summary: Buscar producto por su ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Producto obtenido con exito"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  message:
+                    type: string
+    post:
+      summary: Actualizar un producto por su ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Producto actualizado con exito"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  message:
+                    type: string
+    delete:
+      summary: Eliminar un producto por su ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Producto eliminado con exito"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  message:
+                    type: string
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        thumbnail:
+          type: string
+        code:
+          type: string
+        stock:
+          type: number
+        category:
+          type: string
+        status:
+          type: boolean
+        owner:
+          type: string

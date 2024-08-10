@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import cors from "cors";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 
 import { errorHandler } from "../middleware/error.js";
 import "../config/db.config.js";
@@ -58,6 +60,21 @@ app.use((err, req, res, next) => {
     }
     next();
 });
+
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.1",
+        info: {
+            title: "Documentación del Ecommerce de Ribot", 
+            description: "App para venta de productos al por menor"
+        }
+    },
+    apis: ["./src/docs/**/*.yaml"]
+}
+
+const specs = swaggerJSDoc(swaggerOptions);
+
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 //Listen server
 const httpServer = app.listen(PORT, () => {

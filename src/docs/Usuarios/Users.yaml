@@ -1,0 +1,491 @@
+openapi: 3.0.1
+info:
+  title: Documentación del Ecommerce de Ribot
+  description: E-commerce
+servers:
+  - url: https://punisportsapi.up.railway.app
+paths:
+  /api/users:
+    get:
+      summary: Obtener todos los usuarios
+      tags:
+        - Usuarios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Usuario obtenidos con exito"
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Error interno del servidor"
+    post:
+      summary: Registrar un usuario nuevo
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email: 
+                  type: string
+                password:
+                  type: string
+                age:
+                  type: number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Usuario registrado con exito"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+                  isLogged:
+                    type: boolean
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Error interno del servidor"
+    delete:
+      summary: Eliminar un usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Usuario borrado"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Error interno del servidor"
+  /api/users/login:
+    post:
+      summary: Login un usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: 
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Bienvenido"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+                  isLogged:
+                    type: boolean
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "No se pudo obtener el usuario"
+                  isLogged:
+                    type: boolean
+                    example: false
+  /api/users/logout:
+    get:
+      summary: Logout un usuario
+      tags:
+        - Usuarios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Usuario deslogeado"
+                  isLogged:
+                    type: boolean
+                    example: false
+  /api/users/current:
+    get:
+      summary: Usuario logeado actualmente
+      tags:
+        - Usuarios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Usuario obtenidos con exito"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+                  isLogged:
+                    type: boolean
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "No se pudo obtener el usuario"
+                  isLogged:
+                    type: boolean
+                    example: false
+  /api/users/requestPasswordReset:
+    post:
+      summary: Pedido de reseteo de password. Envia un mail
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Mensaje enviado"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "No se pudo obtener el usuario"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+                  isLogged:
+                    type: boolean
+                    example: false
+  /api/users/reset-password:
+    post:
+      summary: Finalizar el pedido de reseteo
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: 
+                  type: string
+                password: 
+                  type: string
+                token: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Password cambiada con exito"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "No se pudo obtener el usuario"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '400':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                  isLogged:
+                    type: boolean
+                    example: false
+  /api/users/{rol}/{umail}:
+    get:
+      summary: Cambiar los roles de un usuario
+      tags:
+        - Usuarios
+      parameters:
+        - in: path
+          name: umail
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: rol
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Rol cambiado"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+                  isLogged:
+                    type: boolean
+        '500':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "No se pudo obtener el usuario"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '404':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+                  isLogged:
+                    type: boolean
+                    example: false
+        '400':
+          description: NOK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    example: false
+                    type: boolean
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+                  isLogged:
+                    type: boolean
+                    example: false
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        age:
+          type: number
+        cart:
+          type: string
+        rol:
+          type: string
+        resetToken:
+          type: string
+        documents:
+          type: string
+        last_connection:
+          type: string

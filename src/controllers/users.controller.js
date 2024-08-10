@@ -162,21 +162,21 @@ class UserController {
         try {
             const user = await userService.findUser(email);
             if (!user) {
-                return res.status(404).send({ok: false, message: "Usuario no encontrado", isLogged: false});
+                return res.status(404).send({ok: false, error: "Usuario no encontrado", isLogged: false});
             }
 
             const resetToken = user.resetToken;
             if (!resetToken || resetToken.token !== token) {
-                return res.status(400).send({ok: false, message: "Token invalido", isLogged: false});
+                return res.status(400).send({ok: false, error: "Token invalido", isLogged: false});
             }
 
             const now = new Date();
             if (now > resetToken.expiresAt) {
-                return res.status(400).send({ok: false, message: "Token expirado", isLogged: false});
+                return res.status(400).send({ok: false, error: "Token expirado", isLogged: false});
             }
 
             if (isValidPassword(password, user)) {
-                return res.status(400).send({ok: false, message: "La nueva contraseña debe ser distinta a la anterior", isLogged: false});
+                return res.status(400).send({ok: false, error: "La nueva contraseña debe ser distinta a la anterior", isLogged: false});
             }
 
             user.password = createHash(password);
