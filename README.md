@@ -37,3 +37,4 @@
 - Error handling with middlewares
 - Error logging
 - Multer
+- MercadoPago

@@ -9,6 +9,17 @@ const cartService = new CartService();
 const productService = new ProductService();
 
 class TicketController {
+    async mercadoPago(req, res) {
+        try {
+            const products = req.body.products;
+            console.log(products);
+            res.status(200);
+        } catch (error) {
+            console.log(error);
+            res.status(500)
+        }
+    }
+
     async deleteTicket(req, res) {
         try {
             const tid = req.params.tid;

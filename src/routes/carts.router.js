@@ -15,6 +15,7 @@ router.get("/:cid", cartController.getCartById);
 router.put("/:cid", cartController.updateCart);
 router.delete("/:cid", cartController.deleteCart);
 
+router.post('/create_preference', ticketController.mercadoPago);
 router.post("/:cid/product/:pid", cartController.addProductToCart);
 router.delete("/:cid/product/:pid", cartController.deleteProduct);
 router.put("/:cid/product/:pid", cartController.updateProduct);
