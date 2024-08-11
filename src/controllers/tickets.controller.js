@@ -18,7 +18,7 @@ class TicketController {
         //     console.log(error);
         //     res.status(500)
         // }
-        console.log(req.body.products);
+        console.log("hola");
     }
 
     async deleteTicket(req, res) {
