@@ -7,6 +7,7 @@ import MongoStore from "connect-mongo";
 import cors from "cors";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
+import multer from "multer";
 
 import { errorHandler } from "../middleware/error.js";
 import "../config/db.config.js";
